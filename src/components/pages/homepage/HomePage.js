@@ -9,12 +9,10 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchTrending().then((response) => {
-      //console.log("response ==>>", response);
       setTrendMovies([...response]);
     });
   }, []);
   return (
-    //console.log("trendMovies ==>>", trendMovies);
     <HomeStyled>
       <div className="homepage">
         <h2 className="homepage_title">Trending today</h2>
@@ -42,40 +40,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// class HomePage extends Component {
-//   state = {
-//     trendMovies: [],
-//   };
-
-//   componentDidMount = () => {
-//     fetchTrending().then((response) => {
-//       //console.log("response ==>>", response);
-//       this.setState((prev) => ({
-//         ...prev,
-//         trendMovies: [...response],
-//       }));
-//     });
-//   };
-
-//   render() {
-//     const { trendMovies } = this.state;
-//     //console.log("trendMovies ==>>", trendMovies);
-//     return (
-//       <HomeStyled>
-//         <div className="homepage">
-//           <h2>Trending today</h2>
-//           <ul>
-//             {trendMovies.map((movie, index) => (
-//               <li key={`${movie.id}${index}`}>
-//                 <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       </HomeStyled>
-//     );
-//   }
-// }
-
-// export default HomePage;
