@@ -29,17 +29,21 @@ const MovieDetailsPage = () => {
   }, []);
 
   const goBack = () => {
-    history.push(
-      //location.state.from
-      {
-        pathname: location.state.from,
-        search: `?query=${location.state.query}`,
-        state: {
-          from: location.pathname,
-          query: location.state.query,
-        },
-      }
-    );
+    if (!location.state.query) {
+      history.push(`/`);
+    } else {
+      history.push(
+        //location.state.from
+        {
+          pathname: location.state.from,
+          search: `?query=${location.state.query}`,
+          state: {
+            from: location.pathname,
+            query: location.state.query,
+          },
+        }
+      );
+    }
   };
 
   const {

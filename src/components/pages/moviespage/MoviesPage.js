@@ -27,6 +27,7 @@ const MoviesPage = () => {
   const getMovies = async (query) => {
     const result = await fetchMovies(query);
     //console.log("getMovies result", result);
+
     setState((prev) => ({
       ...prev,
       searchMovies: [...result],
@@ -37,7 +38,7 @@ const MoviesPage = () => {
     e.preventDefault();
     getMovies(state.query);
     history.push({
-      ...location,
+      pathname: location.pathname,
       search: `?query=${state.query}`,
     });
   };
