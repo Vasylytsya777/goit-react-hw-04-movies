@@ -5,7 +5,7 @@ import Loader from "react-loader-spinner";
 const LoaderSpinner = () => {
   return (
     <div className="loader">
-      <Loader type="ThreeDots" color="black" height={80} width={80} />
+      <Loader type="ThreeDots" color="green" height={80} width={80} />
     </div>
   );
 };

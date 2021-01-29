@@ -14,6 +14,7 @@ import MovieDetailsStyled from "./MovieDetailsStyled";
 
 const MovieDetailsPage = () => {
   const [state, setState] = useState({});
+  const [from, setFrom] = useState({});
   const match = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
@@ -24,26 +25,25 @@ const MovieDetailsPage = () => {
     setState({ ...result });
   };
   useEffect(() => {
+    setFrom({ ...location.state });
     getMovieDetails(history.location.state.movieId);
     // eslint-disable-next-line
   }, []);
 
   const goBack = () => {
-    if (!location.state.query) {
-      history.push(`/`);
-    } else {
-      history.push(
-        //location.state.from
-        {
-          pathname: location.state.from,
-          search: `?query=${location.state.query}`,
-          state: {
-            from: location.pathname,
-            query: location.state.query,
-          },
-        }
-      );
-    }
+    from.query
+      ? history.push(
+          //location.state.from
+          {
+            pathname: from.from,
+            search: `?query=${from.query}`,
+            state: {
+              from: from.from,
+              query: from.query,
+            },
+          }
+        )
+      : history.push(from.from);
   };
 
   const {
@@ -63,15 +63,13 @@ const MovieDetailsPage = () => {
           Go Back
         </button>
         <div className="details__info">
-          <img
-            src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : title
-            }
-            alt={title}
-            width="250px"
-          />
+          {poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={title}
+              width="250px"
+            />
+          )}
           <div className="details__info-description">
             <h2 className="details__info-title">
               {title} ({release_date && release_date.slice(0, 4)})
